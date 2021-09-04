@@ -1,0 +1,11 @@
+main{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+}
