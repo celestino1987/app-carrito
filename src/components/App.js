@@ -1,24 +1,17 @@
-import React,{useState} from 'react'
-import { AppGalery } from './AppGalery'
-import { AppHeader } from './AppHeader'
-import axios from 'axios'
+import React from "react";
+import { AppGalery } from "./AppGalery";
+import { AppHeader } from "./AppHeader";
+import { useHookGetAxios } from "../hooks/useHookGetAxios";
+
 
 export const App = () => {
-  const [animeList, setAnimeList] = useState();
-  const AxiosAnime = async (query) => {
-    await axios
-      .get(`https://api.jikan.moe/v3/search/anime?q=${query}`)
-      .then((data) => {
-        setAnimeList([data.data.results][0]);
-      });
-  };
+    const [animeList,AxiosAnime] = useHookGetAxios()
+
   return (
     <div>
-      
-
-      <AppHeader AxiosAnime={AxiosAnime}/>
+      <AppHeader AxiosAnime={AxiosAnime} />
       <AppGalery animeList={animeList} />
      
     </div>
-  )
-}
+  );
+};

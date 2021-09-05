@@ -1,23 +1,24 @@
 import React from "react";
-import { useHookGetChampions } from "../hooks/useHookGetChampions";
+
 import { AppCard } from "./AppCard";
 
-export const AppGalery = ({animeList}) => {
-  const champion = useHookGetChampions();
-  //let arr = Object.values(animeList);
-console.log(animeList)
+
+import '../css/AppGalery.css'
+
+export const AppGalery = ({ animeList }) => {
+
+
+  
   return (
     <>
       <main>
-          <div className="cards">
-
-        
-          {animeList?.map((anime) => (
+        <div className="cards">
+          {animeList.length  > 0 ? animeList?.map((anime) => (
             <AppCard anime={anime} key={anime.mal_id} />
-              
-              ))}
-              </div>
-    
+          ))  : <h2>"No hay busqueda..." </h2>}
+          
+        </div>
+     
       </main>
     </>
   );
