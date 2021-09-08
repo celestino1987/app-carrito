@@ -1,0 +1,13 @@
+.circular{
+
+    width: 100px !important;
+    height: 100px !important;
+      
+}
+.divCircular{
+   
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}

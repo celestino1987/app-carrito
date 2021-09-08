@@ -1,0 +1,16 @@
+.btn {
+margin: 10px;
+padding: 10px;
+width: 200px;
+border-radius: 10px;
+
+}
+.btn-buy{
+    background: crimson;
+    color: white;
+
+}
+.btn-add{
+    background: yellowgreen;
+    color: white;
+}

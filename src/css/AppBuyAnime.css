@@ -1,0 +1,10 @@
+.div-btn{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+.btn-ui{
+    width: 30%;
+    height: 15%;
+}

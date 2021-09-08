@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     align-items:center ;
     justify-content: space-between;
-    background: rgb(212, 211, 211);
+   
     width: 90%;
     height: 70vh;
     border-radius:16px ;
@@ -28,4 +28,10 @@ h2{
     font-size:42px ;
     font-weight: 400px;
     text-transform: uppercase;
+}
+.btns{
+   
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

@@ -9,7 +9,7 @@ import { useParams } from "react-router";
     const [detail, setDetail] = useState([]);
     useEffect(() => {
         getDetailsId();
-    }, []);
+    },[]);
     const getDetailsId = async () => {
         await axios.get(`https://api.jikan.moe/v3/anime/${id}`).then((data) => {
             setDetail(data.data);
