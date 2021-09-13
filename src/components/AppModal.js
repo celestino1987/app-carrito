@@ -2,6 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { AppBuyAnime } from "./AppBuyAnime";
+import { AppBuyCar } from "./AppBuyCar";
+
+
 
 function getModalStyle() {
   const top = 50;
@@ -26,20 +29,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AppModal({ open, setOpen }) {
+export default function AppModal({ open, setOpen,change,movie }) {
   const classes = useStyles();
   
   const [modalStyle] = React.useState(getModalStyle);
+  
 
   const handleClose = () => {
     setOpen(false);
   };
+  
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <AppBuyAnime  setOpen={setOpen}/>
+  
+    const body = (
+      <div style={modalStyle} className={classes.paper}>
+     {
+
+     change ? <AppBuyAnime  setOpen={setOpen}/>: <AppBuyCar setOpen={setOpen} movie={movie}/>
+     } 
     </div>
   );
+
+  
+ 
+
 
   return (
     <div>
@@ -49,7 +62,11 @@ export default function AppModal({ open, setOpen }) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        {body}
+       
+         {body}
+         
+         
+       
       </Modal>
     </div>
   );

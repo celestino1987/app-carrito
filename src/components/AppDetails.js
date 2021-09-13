@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useState,useEffect, useLayoutEffect } from "react";
 
 import { useHookGetId } from "../hooks/useHookGetId";
 import { BtnBuy } from "./BtnBuy";
 import { BtnAddToCart } from "./BtnAddToCart";
 import { BackArrow } from "./BackArrow";
 import { AddIconSopping } from "./AddIconSopping";
+import { axiosMovies } from "../redux-thunk/accions/rootAcion";
+import { useDispatch, useSelector } from "react-redux";
 
 import "../css/AppCard.css";
 import "../css/AppDetails.css";
 import '../css/AddIconSopping.css'
-import AppModal from "./AppModal";
+
 
 
 
 
 export const AppDetails = () => {
-
+  
   const [detail] = useHookGetId();
+  const [open, setOpen] = useState(false);
+  const [change, setChange] = useState(true)
+  //condicion para que no  pueda comprar mas de una vez cuando se entra por promera vez
+  const [buy,setBuy] = useState(true)
+  const dispatch = useDispatch();
+  const movie = useSelector((state) => state.rootReducer.posts);
+  const post = useSelector((state) => state.rootReducer.post);
+  useEffect(() => {
+  dispatch(axiosMovies());
+ }, []);
+
 
   return (
     <>
       <div className="icon">
       <BackArrow />
-      <AddIconSopping />
+      <AddIconSopping   setChange={setChange} open={open} setOpen={setOpen}/>
       </div>
       <h2>Detalles de la compra</h2>
       <div className="container">
@@ -43,9 +56,9 @@ export const AppDetails = () => {
           </p>
         </div>
         <div className="btns" >
-        <BtnBuy />
-        <BtnAddToCart />
-         <AppModal />
+        <BtnBuy open={open} setOpen={setOpen} change={change} setChange={setChange} movie={movie}/>
+        <BtnAddToCart  setChange={setChange} setOpen ={setOpen} buy={buy} setBuy={setBuy}  movie={movie}  post={post} />
+         
          
         </div>
       </div>

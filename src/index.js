@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
+
 import './index.css';
+import { store } from './redux-thunk/store/store';
+
+
 
 import reportWebVitals from './reportWebVitals';
 import { AppRouter } from './router/AppRouter';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AppRouter/>
-  </React.StrictMode>,
+<Provider store={store}>
+  <AppRouter/>
+
+</Provider>,
+ 
   document.getElementById('root')
 );
 

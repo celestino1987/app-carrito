@@ -8,3 +8,15 @@
    
 
 }
+.acount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    height: 20px;
+    background-color: rgb(255, 115, 0);
+    color:wheat;
+    border-radius: 50%;
+    font-size: 10px;
+}
+
