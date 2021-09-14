@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AppModal({ open, setOpen,change,movie }) {
-  const classes = useStyles();
+export default function AppModal({ open, setOpen,change,movie ,setAmount,amount, disabled ,post}) {
+  const classes = useStyles()
   
   const [modalStyle] = React.useState(getModalStyle);
   
@@ -45,7 +45,7 @@ export default function AppModal({ open, setOpen,change,movie }) {
       <div style={modalStyle} className={classes.paper}>
      {
 
-     change ? <AppBuyAnime  setOpen={setOpen}/>: <AppBuyCar setOpen={setOpen} movie={movie}/>
+     change ? <AppBuyAnime  setOpen={setOpen}/>: <AppBuyCar  post={post} disabled={disabled} amount={amount} setAmount={setAmount} setOpen={setOpen} movie={movie}/>
      } 
     </div>
   );

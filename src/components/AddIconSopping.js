@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import '../css/AddIconSopping.css'
 
-export const AddIconSopping = ({setOpen,setChange }) => {
+export const AddIconSopping = ({setOpen,setChange  ,amount}) => {
     const count = useSelector(state => state.count.value)
     
     const handleOpenModal = () =>{  
