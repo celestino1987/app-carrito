@@ -28,9 +28,9 @@ export const AppDetails = () => {
   useEffect(() => {
     dispatch(axiosMovies());
   }, []);
-// useEffect(() => {
-//   setDisabled(amount > 0 ? false : true);
-// }, [amount]);
+ useEffect(() => {
+  setDisabled(amount > 0 ? false : true);
+}, [amount]);
 
   return (
     <>

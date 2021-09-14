@@ -27,6 +27,13 @@
       "mal_id": 30694,
       "amount": 1,
       "id": 4
+    },
+    {
+      "price": 14.14,
+      "foto": "https://cdn.myanimelist.net/images/anime/1817/104328.jpg",
+      "mal_id": 38034,
+      "amount": 1,
+      "id": 5
     }
   ]
 }
