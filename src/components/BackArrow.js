@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 
 export const BackArrow = () => {
     return (
-        <div className="icon">
-           <Link to="/"> <KeyboardBackspaceIcon /> </Link>
+        <div className="icon ">
+           <Link to="/"> <KeyboardBackspaceIcon color="action"  fontSize="large"/> </Link>
 
         </div>
     )

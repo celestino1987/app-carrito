@@ -1,9 +1,9 @@
 export const types = {
-  POST_BASE:"POST_BASE",
-  GET_START: "GET-START",
-  GET_BASE: "GET_BASE",
-  PUT_BASE :"PUT_BASE",
-  ACTION_COUNTER_INCREMENT: "counter/increment",
+  POST_BASE: "POST_BASE",
 
-  ACTION_COUNTER_DECREMENT: "counter/decrement",
+  GET_BASE: "GET_BASE",
+  PUT_BASE: "PUT_BASE",
+  DEL_BASE: "DEL_BASE",
+  DEL_ALL: "DEL_ALL",
+  
 };

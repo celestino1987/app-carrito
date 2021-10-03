@@ -6,11 +6,11 @@ const MOVIES = 'MOVIES';
 
 
 
-export const getMovies = () => {
+export const getCart = () => {
     return axios.get(`${URL}/${MOVIES}`);
   };
 
-export const postMovies = (movies) =>{
+export const postAddCart = (movies) =>{
 
      return axios.post(`${URL}/${MOVIES}`,movies)
   }
@@ -18,3 +18,7 @@ export const postMovies = (movies) =>{
 
     return axios.put(`${URL}/${MOVIES}/${id}`,update)
   }
+  export const deleteIdCart = (id) => {
+    return axios.delete(`${URL}/${MOVIES}/${id}`);
+  };
+ 

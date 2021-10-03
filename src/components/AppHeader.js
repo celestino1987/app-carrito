@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+
 import "../css/AppHeader.css";
+import { AddIconSopping } from "./AddIconSopping";
 
-
-export const AppHeader = ({ AxiosAnime }) => {
+export const AppHeader = ({ AxiosAnime, loading, setLoading }) => {
   const [search, setSearch] = useState();
 
   const handleSearch = (e) => {
@@ -10,10 +11,11 @@ export const AppHeader = ({ AxiosAnime }) => {
 
     AxiosAnime(search);
   };
-   
+
   return (
     <>
       <header>
+       
         <h1>
           El mejor <strong>-Anime-</strong> para comprar
         </h1>

@@ -5,7 +5,32 @@
 
 }
 .scroll{
-    height: 100vh;
+    height: 90%;
     overflow-y: scroll;
     max-height: 100%;
+}
+.boxArticulo{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    border: 1px solid rgb(122, 122, 122);
+    color: crimson;
+}
+.myBuy{
+    font-size: 20px;
+
+
+}
+.box-center{
+    display: flex ;
+    align-items: center;
+}
+.btn-del{
+
+        border: none;
+        background: none;
+        color: brown;
+        cursor: pointer;
+     
 }

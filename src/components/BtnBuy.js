@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../css/AppBtn.css";
 import AppModal from "./AppModal";
 
-export const BtnBuy = ({post, open, setOpen, change, setChange,movie ,setAmount ,amount,disabled }) => {
+export const BtnBuy = ({loading,setLoading,  open, setOpen, change, setChange,movie ,setAmount ,amount,disabled ,totalSum}) => {
+  const [price,setPrice] = useState(false)
   const handleTrueModal = () => {
     setOpen(true);
     setChange(true);
+    setPrice(true)
   };
 
   return (
@@ -16,8 +18,12 @@ export const BtnBuy = ({post, open, setOpen, change, setChange,movie ,setAmount 
       </button>
 
       <AppModal
-      post={post}
-     
+       loading={loading}
+       setLoading={setLoading}
+      setPrice={setPrice}
+      price={price}
+    
+      totalSum={totalSum}
       disabled={disabled}
         setOpen={setOpen}
         open={open}

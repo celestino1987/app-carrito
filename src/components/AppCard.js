@@ -5,8 +5,8 @@ import "../css/AppCard.css";
 
 
 
-export const AppCard = ({ anime }) => {
- 
+export const AppCard = ({ anime,random }) => {
+ console.log(random)
 
   const history = useHistory()
   
@@ -14,10 +14,10 @@ export const AppCard = ({ anime }) => {
   return (
     <>
        <div className="card">
-        <div onClick={() => history.push(`/details/${anime.mal_id}`) } >
-          <img src={anime.image_url} alt={'imagen de '+ anime.name}  />
+        <div onClick={() => history.push(`/details/${anime ? anime.mal_id : random.mal_id}`) } >
+          <img src={anime ? anime?.image_url : random?.image_url} alt={'imagen de '}  />
         </div>
-        <h3>{anime.title}</h3>
+        <h3>{anime ? anime.title : random.title}</h3>
       </div>
         
     </>

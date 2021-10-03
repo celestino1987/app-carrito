@@ -1,14 +1,17 @@
-import { PanoramaRounded } from "@material-ui/icons";
+
 import {
-  getMovies,
-  postMovies,
+  deleteIdCart,
+  getCart,
+  postAddCart,
   putMovies,
+  deleteAll,
+  deleteAllCart
 } from "../../service/serviceBuyMovie";
 import { types } from "../types/types";
 
 export const axiosMovies = () => {
   return async (dispatch) => {
-    await getMovies().then((res) => {
+    await getCart().then((res) => {
       dispatch({
         type: types.GET_BASE,
         payload: res.data,
@@ -18,10 +21,10 @@ export const axiosMovies = () => {
 };
 export const axiosPostMovies = (movies) => {
   return async (dispatch) => {
-    await postMovies(movies).then((res) => {
+    await postAddCart(movies).then((res) => {
       dispatch({
         type: types.POST_BASE,
-        payload: res.data,
+        payload:[ res.data],
       });
     });
   };
@@ -32,8 +35,27 @@ export const axiosPutMovies = (id, update) => {
     await putMovies(id, update).then((res) =>
       dispatch({
         type: types.PUT_BASE,
-        payload: res.data,
+        payload:[ res.data],
       })
-    );
+    )
+    .catch( error => {
+      console.error( 'Put no va: ', error )
+    })
   };
 };
+
+
+export const axiosDelMovies = (id)=>{
+  return async (dispatch) => {
+    await deleteIdCart(id).then((res) => {
+      dispatch({
+        type: types.DEL_BASE,
+        payload: [res.id],
+      });
+    })
+    .catch( error => {
+      console.error( 'función enRechazo invocada: ', error )
+    })
+  }; 
+
+}
