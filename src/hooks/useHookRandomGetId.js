@@ -14,7 +14,10 @@ export const useHookRandomGetId = () => {
       
     };
     useEffect(() => {
-      getRandomIds();
+      setTimeout(()=>{
+        
+        getRandomIds();
+      },3000)
     }, []);
 return [random];
 };

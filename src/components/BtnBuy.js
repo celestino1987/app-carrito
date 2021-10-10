@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import "../css/AppBtn.css";
 import AppModal from "./AppModal";
 
-export const BtnBuy = ({loading,setLoading,  open, setOpen, change, setChange,movie ,setAmount ,amount,disabled ,totalSum}) => {
+export const BtnBuy = ({ addToCart,loading,setLoading,  open, setOpen, change, setChange,movie ,setAmount ,amount,disabled ,totalSum}) => {
   const [price,setPrice] = useState(false)
   const handleTrueModal = () => {
     setOpen(true);
     setChange(true);
-    setPrice(true)
+    setPrice(true);
+    addToCart()
   };
 
   return (

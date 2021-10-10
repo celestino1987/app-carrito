@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { AppGalery } from "./AppGalery";
 import { AppHeader } from "./AppHeader";
 import { useHookGetAxios } from "../hooks/useHookGetAxios";
 
+
 export const App = () => {
   const [animeList, AxiosAnime] = useHookGetAxios();
-
+ 
   return (
     <>
       <AppHeader AxiosAnime={AxiosAnime} />
+    
+     <AppGalery animeList={animeList} AxiosAnime={AxiosAnime} />
+   
 
-      <AppGalery animeList={animeList} />
+   
     </>
   );
 };

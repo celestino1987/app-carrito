@@ -40,4 +40,10 @@
     outline: none;
     padding: 10px;
   }
- 
+ .btn-close{
+  border: none;
+  background: none;
+  cursor: pointer;
+    
+
+ }

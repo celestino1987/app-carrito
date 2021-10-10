@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 
 import "../css/AppHeader.css";
-import { AddIconSopping } from "./AddIconSopping";
 
-export const AppHeader = ({ AxiosAnime, loading, setLoading }) => {
+
+export const AppHeader = ({ AxiosAnime }) => {
   const [search, setSearch] = useState();
 
   const handleSearch = (e) => {
     e.preventDefault();
+   
 
-    AxiosAnime(search);
+      AxiosAnime(search);
+    
   };
 
   return (
     <>
+    
       <header>
-       
         <h1>
           El mejor <strong>-Anime-</strong> para comprar
         </h1>

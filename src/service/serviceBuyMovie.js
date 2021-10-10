@@ -22,3 +22,4 @@ export const postAddCart = (movies) =>{
     return axios.delete(`${URL}/${MOVIES}/${id}`);
   };
  
+ ;

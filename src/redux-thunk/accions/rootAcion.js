@@ -4,8 +4,7 @@ import {
   getCart,
   postAddCart,
   putMovies,
-  deleteAll,
-  deleteAllCart
+  
 } from "../../service/serviceBuyMovie";
 import { types } from "../types/types";
 

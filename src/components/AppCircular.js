@@ -9,9 +9,15 @@ export  const  AppCircular = () => {
 
 
   return (
+     
     <div className="divCircular"> 
+     
+          
+         <CircularProgress  className="circular" color="secondary" />
       
-      <CircularProgress  className="circular" color="secondary" />
     </div>
+
   );
+
+
 }

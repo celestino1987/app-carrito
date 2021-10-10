@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@material-ui/core";
 import tarjetas from "../img/tarjetas.png";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHookGetId } from "../hooks/useHookGetId";
 import { AppCircular } from "./AppCircular";
 import { serviceSwal } from "../service/serviceSwal";
-import "../css/AppBuyAnime.css";
+import { axiosDelMovies } from "../redux-thunk/accions/rootAcion";
 import { useDispatch } from "react-redux";
 import { types } from "../redux-thunk/types/types";
 
-import { axiosDelMovies } from "../redux-thunk/accions/rootAcion";
+import "../css/AppBuyAnime.css";
+import { getCart } from "../service/serviceBuyMovie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,35 +22,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AppBuyAnime = ({
-  setOpen,
-  totalSum,
-  price,
-  loading,
-  setLoading,
-  movie,
-}) => {
+export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
   const classes = useStyles();
-  const [detail] = useHookGetId();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  
+  //funcion recursiva para borrar el carrito
+  const deleteAll = async () => {
+    const handleGet = await getCart().then((res) => res.data);
 
-  const  deleteAll =() =>{
+    let firts = handleGet[0]?.id;
 
-    for(let id = 0;id <= movie.length; id++){ 
-    console.log(id)
-    dispatch(axiosDelMovies(id))
-  }
-  dispatch({type:types.DEL_ALL})
-  }
+    if (handleGet.length > 0) {
+      await dispatch(axiosDelMovies(firts));
+
+      dispatch({ type: types.DEL_ALL });
+
+      return deleteAll();
+    } else {
+      return "";
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    setLoading(true);
+    
+    deleteAll();
+    setLoading(false);
     setTimeout(() => {
-      setLoading(false);
       setOpen(false);
+      setLoading(true);
       serviceSwal(
         "success",
         "Su pedido fue todo un exito !Gracia¡",
@@ -59,15 +59,17 @@ export const AppBuyAnime = ({
         false,
         1500
       );
-    }, 5000);
-    
-    deleteAll()
-    
-      
-    
+    }, 4000);
   };
 
-  if (loading) {
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+    }, 2000);
+    setLoading(false);
+  }, []);
+
+  if (!loading) {
     return <AppCircular />;
   } else {
     return (
@@ -113,10 +115,9 @@ export const AppBuyAnime = ({
               }}
             />
             <div className="div-btn">
-              <h5>Total de su pedido:{price ? detail.score * 2 : totalSum} </h5>
+              <h5>Total de su pedido:{totalSum} </h5>
 
               <Button
-             
                 type="submit"
                 className="btn-ui"
                 color="secondary"
