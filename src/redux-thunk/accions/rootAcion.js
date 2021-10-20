@@ -15,7 +15,11 @@ export const axiosMovies = () => {
         type: types.GET_BASE,
         payload: res.data,
       });
-    });
+    })
+    .catch( error => {
+      console.error( 'Algo salio mal en Get: ', error )
+    })
+    
   };
 };
 export const axiosPostMovies = (movies) => {
@@ -25,7 +29,10 @@ export const axiosPostMovies = (movies) => {
         type: types.POST_BASE,
         payload:[ res.data],
       });
-    });
+    })
+    .catch( error => {
+      console.error( 'Algo salio mal en post: ', error )
+    }) 
   };
 };
 
@@ -34,7 +41,7 @@ export const axiosPutMovies = (id, update) => {
     await putMovies(id, update).then((res) =>
       dispatch({
         type: types.PUT_BASE,
-        payload:[ res.data],
+        payload: res.data,
       })
     )
     .catch( error => {
@@ -49,11 +56,11 @@ export const axiosDelMovies = (id)=>{
     await deleteIdCart(id).then((res) => {
       dispatch({
         type: types.DEL_BASE,
-        payload: [res.id],
+        payload: id,
       });
     })
     .catch( error => {
-      console.error( 'función enRechazo invocada: ', error )
+      console.error( 'Algo salio mal en delete: ', error )
     })
   }; 
 

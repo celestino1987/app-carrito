@@ -17,7 +17,7 @@ export const useHookRandomGetId = () => {
       setTimeout(()=>{
         
         getRandomIds();
-      },3000)
+      },1000)
     }, []);
 return [random];
 };

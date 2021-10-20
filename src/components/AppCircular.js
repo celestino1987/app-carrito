@@ -1,23 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-import '../css/AppCircular.css'
+import CircularProgress from "@material-ui/core/CircularProgress";
+import "../css/AppCircular.css";
 
-
-
-export  const  AppCircular = () => {
-
-
+export const AppCircular = () => {
   return (
-     
-    <div className="divCircular"> 
-     
-          
-         <CircularProgress  className="circular" color="secondary" />
-      
+    <div className="divCircular">
+      <CircularProgress className="circular" color="secondary" />
     </div>
-
   );
-
-
-}
+};

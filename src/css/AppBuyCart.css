@@ -32,5 +32,12 @@
         background: none;
         color: brown;
         cursor: pointer;
+       
      
+}
+.box-cart{
+    overflow: hidden;
+    height: 95%;
+ 
+
 }

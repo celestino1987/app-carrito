@@ -1,45 +1,65 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { BtnEnlace } from "./BtnEnlace";
-import "../css/AppBuyCar.css";
-
 import DeleteIcon from "@material-ui/icons/Delete";
 import { axiosDelMovies } from "../redux-thunk/accions/rootAcion";
 import { useDispatch } from "react-redux";
 import { axiosPutMovies } from "../redux-thunk/accions/rootAcion";
 import { AppCircular } from "./AppCircular";
-import { getCart } from "../service/serviceBuyMovie";
+import PropTypes from "prop-types";
+import "../css/AppBuyCart.css";
+import { serviceSwal } from "../service/serviceSwal";
 
-export const AppBuyCar = ({
-  movie,
-  amount,
-  setAmount,
-  disabled,
-  setChange,
-  setOpen,
-  totalSum,
-  setPrice,
+export const AppBuyCart = ({
   loading,
+  movie,
+  setChange,
   setLoading,
+  setOpen,
+  setPrice,
+  totalSum,
 }) => {
+ 
   const dispatch = useDispatch();
-  let update = "";
-  const handleChangeNumber = (increase = false) => {
-    setAmount((prevAmount) => (increase ? prevAmount + 1 : prevAmount - 1));
-  };
+  let update = {};
 
-const handleDeleteID = async( id) =>{
-  const handleGet = await getCart().then((res) => res.data);
-  const getId =  handleGet.find(( cartId) => cartId.id === id )
-  console.log(getId?.id)
-  dispatch(axiosDelMovies(getId?.id))
 
-}
+  const handleDelete =(id)=>{
+    setOpen(false)
+    serviceSwal(
+      "question",
+      "¿Desea eliminar el producto?",
+      "",
+      true,
+      true,
+      false
+    )
+   .then(async (res) => {
+     if (res.isConfirmed) {
+       await dispatch(axiosDelMovies(id));
+       try {
+        
+          if(movie.length -1 < 1) {
+            setOpen(false)
+          }else{
+            setOpen(true)
+          }
+       
+          } catch {
+            serviceSwal("error", "", "Error", false, false, 1500);
+          }
+        }else{
+          setOpen(true)
+        }
+    })
+
+  }
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(true);
     }, 2000);
+   
     setLoading(false);
   }, [movie]);
   if (!loading) {
@@ -47,7 +67,7 @@ const handleDeleteID = async( id) =>{
   } else {
     return (
       <>
-        <div>
+        <div className="box-cart">
           <h2 className="myBuy"> Mi carrito</h2>
           <div className="scroll">
             {movie.map((mov) => (
@@ -57,17 +77,15 @@ const handleDeleteID = async( id) =>{
                 <span>precio: {Math.round(mov?.price * mov?.amount)}€</span>
                 <span>Cantidad:{mov.amount}</span>
                 <button
-                  disabled={disabled}
+                  disabled={mov.amount === 1 ? true : false}
                   onClick={() => {
-                    handleChangeNumber(false);
+                    
 
                     dispatch(
                       axiosPutMovies(
                         mov.id,
                         (update = {
-                          price: mov?.price,
-                          foto: mov.foto,
-                          mal_id: mov?.mal_id,
+                          ...mov,
                           amount: mov.amount - 1,
                         })
                       )
@@ -80,15 +98,13 @@ const handleDeleteID = async( id) =>{
 
                 <button
                   onClick={() => {
-                    handleChangeNumber(true);
+                   
                     dispatch(
                       axiosPutMovies(
                         mov.id,
                         (update = {
-                          price: mov?.price,
-                          foto: mov.foto,
-                          mal_id: mov?.mal_id,
-                          amount: mov.amount + amount,
+                          ...mov,
+                          amount: mov.amount + 1,
                         })
                       )
                     );
@@ -99,7 +115,8 @@ const handleDeleteID = async( id) =>{
                 </button>
                 <button
                   className="btn-del"
-                  onClick={() => handleDeleteID(mov.id) }
+                  onClick={()=>handleDelete(mov.id)}
+                        
                 >
                   <DeleteIcon />
                 </button>
@@ -107,6 +124,7 @@ const handleDeleteID = async( id) =>{
             ))}
             <div className="box-center">
               <h3>Total:{Math.round(totalSum)}€ </h3>
+
               <BtnEnlace
                 setChange={setChange}
                 setOpen={setOpen}
@@ -118,4 +136,8 @@ const handleDeleteID = async( id) =>{
       </>
     );
   }
+};
+AppBuyCart.propTypes = {
+  handleChangeNumber: PropTypes.func,
+  update: PropTypes.object,
 };

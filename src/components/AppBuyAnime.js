@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 
 import { Button } from "@material-ui/core";
 import tarjetas from "../img/tarjetas.png";
@@ -9,6 +9,7 @@ import { serviceSwal } from "../service/serviceSwal";
 import { axiosDelMovies } from "../redux-thunk/accions/rootAcion";
 import { useDispatch } from "react-redux";
 import { types } from "../redux-thunk/types/types";
+import PropTypes from 'prop-types';
 
 import "../css/AppBuyAnime.css";
 import { getCart } from "../service/serviceBuyMovie";
@@ -45,7 +46,7 @@ export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     deleteAll();
     setLoading(false);
     setTimeout(() => {
@@ -115,7 +116,9 @@ export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
               }}
             />
             <div className="div-btn">
-              <h5>Total de su pedido:{totalSum} </h5>
+              <h5>Total de su pedido: {Math.round (totalSum)} € </h5>
+              
+      
 
               <Button
                 type="submit"
@@ -133,3 +136,9 @@ export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
     );
   }
 };
+
+AppBuyAnime.prototypes={
+  handleSubmit:PropTypes.func.isRequired,
+  totalSum: PropTypes.number.isRequired
+
+}

@@ -1,22 +1,19 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 import "../css/AppHeader.css";
 
-
 export const AppHeader = ({ AxiosAnime }) => {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState([]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-   
 
-      AxiosAnime(search);
-    
+    AxiosAnime(search);
   };
 
   return (
     <>
-    
       <header>
         <h1>
           El mejor <strong>-Anime-</strong> para comprar
@@ -36,3 +33,7 @@ export const AppHeader = ({ AxiosAnime }) => {
     </>
   );
 };
+AppHeader.propTypes = {
+handleSearch : PropTypes.func
+
+}

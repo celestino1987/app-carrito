@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from 'prop-types';
 
 import "../css/AppBtn.css";
-import AppModal from "./AppModal";
 
-export const BtnBuy = ({ addToCart,loading,setLoading,  open, setOpen, change, setChange,movie ,setAmount ,amount,disabled ,totalSum}) => {
-  const [price,setPrice] = useState(false)
+
+export const BtnBuy = ({ setPrice,  addToCart, setOpen,  setChange}) => {
+  
   const handleTrueModal = () => {
     setOpen(true);
     setChange(true);
@@ -18,22 +19,10 @@ export const BtnBuy = ({ addToCart,loading,setLoading,  open, setOpen, change, s
         Comprar
       </button>
 
-      <AppModal
-       loading={loading}
-       setLoading={setLoading}
-      setPrice={setPrice}
-      price={price}
-    
-      totalSum={totalSum}
-      disabled={disabled}
-        setOpen={setOpen}
-        open={open}
-        change={change}
-        setChange={setChange}
-        movie={movie}
-        setAmount={setAmount}
-        amount={amount}
-      />
     </>
   );
 };
+BtnBuy.propTypes = {
+  handleTrueModal : PropTypes.func
+
+}
