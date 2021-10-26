@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 
 import { Button } from "@material-ui/core";
 import tarjetas from "../img/tarjetas.png";
@@ -7,12 +7,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import { AppCircular } from "./AppCircular";
 import { serviceSwal } from "../service/serviceSwal";
 import { axiosDelMovies } from "../redux-thunk/accions/rootAcion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { types } from "../redux-thunk/types/types";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+
+import { getCart } from "../service/serviceBuyMovie";
+import { openLoading, openModal } from "../redux-thunk/accions/modalAction";
 
 import "../css/AppBuyAnime.css";
-import { getCart } from "../service/serviceBuyMovie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
+export const AppBuyAnime = ({ totalSum}) => {
+  const loading = useSelector((state)=>state.loadingReducer)
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -48,13 +51,13 @@ export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
     e.preventDefault();
 
     deleteAll();
-    setLoading(false);
+    dispatch(openLoading(false))
     setTimeout(() => {
-      setOpen(false);
-      setLoading(true);
+      dispatch(openModal(false));
+      dispatch(openLoading(true))
       serviceSwal(
         "success",
-        "Su pedido fue todo un exito !Gracia¡",
+        "Su pedido fue todo un exito !Gracias¡",
         "",
         false,
         false,
@@ -65,9 +68,9 @@ export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(true);
-    }, 2000);
-    setLoading(false);
+      dispatch(openLoading(true))
+    }, 1000);
+    dispatch(openLoading(false))
   }, []);
 
   if (!loading) {
@@ -116,15 +119,16 @@ export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
               }}
             />
             <div className="div-btn">
-              <h5>Total de su pedido: {Math.round (totalSum)} € </h5>
-              
-      
+              <h3>
+                Total de su pedido: <span> {Math.round(totalSum)}€</span>{" "}
+              </h3>
 
               <Button
                 type="submit"
                 className="btn-ui"
                 color="secondary"
-                variant="contained"
+                size="small"
+                variant="outlined"
               >
                 {" "}
                 Enviar{" "}
@@ -137,8 +141,7 @@ export const AppBuyAnime = ({ setOpen, totalSum, loading, setLoading }) => {
   }
 };
 
-AppBuyAnime.prototypes={
-  handleSubmit:PropTypes.func.isRequired,
-  totalSum: PropTypes.number.isRequired
-
-}
+AppBuyAnime.prototypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  totalSum: PropTypes.number.isRequired,
+};

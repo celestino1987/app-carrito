@@ -1,31 +1,35 @@
 import React, { useEffect } from "react";
 
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import AddTwoToneIcon from "@material-ui/icons/AddTwoTone";
+import RemoveTwoToneIcon from "@material-ui/icons/RemoveTwoTone";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
 import { BtnEnlace } from "./BtnEnlace";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { axiosDelMovies } from "../redux-thunk/accions/rootAcion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { axiosPutMovies } from "../redux-thunk/accions/rootAcion";
 import { AppCircular } from "./AppCircular";
 import PropTypes from "prop-types";
-import "../css/AppBuyCart.css";
 import { serviceSwal } from "../service/serviceSwal";
+import { openLoading, openModal } from "../redux-thunk/accions/modalAction";
+import "../css/AppBuyCart.css";
 
 export const AppBuyCart = ({
-  loading,
+  
   movie,
-  setChange,
-  setLoading,
-  setOpen,
-  setPrice,
   totalSum,
 }) => {
- 
+  const loading = useSelector((state)=>state.loadingReducer)
   const dispatch = useDispatch();
   let update = {};
 
-
-  const handleDelete =(id)=>{
-    setOpen(false)
+  const handleDelete = (id) => {
+    dispatch(openModal(false));
     serviceSwal(
       "question",
       "¿Desea eliminar el producto?",
@@ -33,104 +37,141 @@ export const AppBuyCart = ({
       true,
       true,
       false
-    )
-   .then(async (res) => {
-     if (res.isConfirmed) {
-       await dispatch(axiosDelMovies(id));
-       try {
-        
-          if(movie.length -1 < 1) {
-            setOpen(false)
-          }else{
-            setOpen(true)
+    ).then(async (res) => {
+      if (res.isConfirmed) {
+        await dispatch(axiosDelMovies(id));
+        try {
+          if (movie.length - 1 < 1) {
+            dispatch(openModal(false));
+          } else {
+            dispatch(openModal(true));
           }
-       
-          } catch {
-            serviceSwal("error", "", "Error", false, false, 1500);
-          }
-        }else{
-          setOpen(true)
+        } catch {
+          serviceSwal("error", "", "Error", false, false, 1500);
         }
-    })
-
-  }
+      } else {
+        dispatch(openModal(true));
+      }
+    });
+  };
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(true);
-    }, 2000);
-   
-    setLoading(false);
-  }, [movie]);
+      dispatch(openLoading(true))
+      
+    }, 1000);
+
+    dispatch(openLoading(false))
+  }, []);
   if (!loading) {
     return <AppCircular />;
   } else {
     return (
       <>
-        <div className="box-cart">
+        <div className="box">
           <h2 className="myBuy"> Mi carrito</h2>
-          <div className="scroll">
-            {movie.map((mov) => (
-              <div className="boxArticulo" key={mov?.mal_id}>
-                <img className="img" src={mov?.foto} alt="imagen.." />
 
-                <span>precio: {Math.round(mov?.price * mov?.amount)}€</span>
-                <span>Cantidad:{mov.amount}</span>
-                <button
-                  disabled={mov.amount === 1 ? true : false}
-                  onClick={() => {
-                    
+          <div className="scroll ">
+            <List
+              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            >
+              {movie.map((mov) => (
+                <div key={mov?.mal_id} className="item">
+                  <ListItem alignItems="center">
+                    <ListItemAvatar>
+                      <Avatar alt="Remy Sharp" src={mov.foto} />
+                    </ListItemAvatar>
+                    <Typography
+                      ml={1}
+                      sx={{ display: "block" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      Precio:{" "}
+                      <span className="color">{Math.round(mov?.price * mov?.amount)}€</span>
+                    </Typography>
+                    <Typography
+                      ml={1}
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      Cantidad:
+                      <span className="color">{mov.amount}</span>
+                    </Typography>
+                    <Typography
+                      ml={1}
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      <button
+                        className={mov.amount ===1 ? "btn-color": "btn-change"}
+                        disabled={mov.amount === 1 ? true : false}
+                        onClick={() => {
+                          dispatch(
+                            axiosPutMovies(
+                              mov.id,
+                              (update = {
+                                ...mov,
+                                amount: mov.amount - 1,
+                              })
+                            )
+                          );
+                        }}
+                      >
+                        {" "}
+                        <RemoveTwoToneIcon />{" "}
+                      </button>
 
-                    dispatch(
-                      axiosPutMovies(
-                        mov.id,
-                        (update = {
-                          ...mov,
-                          amount: mov.amount - 1,
-                        })
-                      )
-                    );
-                  }}
-                >
-                  {" "}
-                  -{" "}
-                </button>
+                      <button
+                        className="btn-change"
+                        onClick={() => {
+                          dispatch(
+                            axiosPutMovies(
+                              mov.id,
+                              (update = {
+                                ...mov,
+                                amount: mov.amount + 1,
+                              })
+                            )
+                          );
+                        }}
+                      >
+                        {" "}
+                        <AddTwoToneIcon />{" "}
+                      </button>
+                    </Typography>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      <button
+                        className="btn-del"
+                        onClick={() => handleDelete(mov.id)}
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </Typography>
+                  </ListItem>
+                  <div className="border"></div>
+                </div>
+              ))}
+            </List>
+          </div>
+          <Divider />
 
-                <button
-                  onClick={() => {
-                   
-                    dispatch(
-                      axiosPutMovies(
-                        mov.id,
-                        (update = {
-                          ...mov,
-                          amount: mov.amount + 1,
-                        })
-                      )
-                    );
-                  }}
-                >
-                  {" "}
-                  +{" "}
-                </button>
-                <button
-                  className="btn-del"
-                  onClick={()=>handleDelete(mov.id)}
-                        
-                >
-                  <DeleteIcon />
-                </button>
-              </div>
-            ))}
-            <div className="box-center">
-              <h3>Total:{Math.round(totalSum)}€ </h3>
+          <div className="box-center">
+            <h3>
+              Total:<span> {Math.round(totalSum)}€ </span>
+            </h3>
 
-              <BtnEnlace
-                setChange={setChange}
-                setOpen={setOpen}
-                setPrice={setPrice}
-              />
-            </div>
+            <BtnEnlace />
           </div>
         </div>
       </>

@@ -1,23 +1,32 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import "../css/AppBtn.css";
+//import "../css/AppBtn.css";
+import { useDispatch } from "react-redux";
+import { openModal ,openChange} from "../redux-thunk/accions/modalAction";
+import { Button } from '@mui/material';
+import { Box } from "@mui/system";
 
 
-export const BtnBuy = ({ setPrice,  addToCart, setOpen,  setChange}) => {
+
+export const BtnBuy = ({   addToCart}) => {
+  const dispatch = useDispatch()
   
   const handleTrueModal = () => {
-    setOpen(true);
-    setChange(true);
-    setPrice(true);
+dispatch(openModal(true))
+dispatch(openChange(true))  
+    
     addToCart()
   };
 
   return (
     <>
-      <button className="btn btn-buy" onClick={handleTrueModal}>
+    <Box mr={1}>
+
+      <Button   color="error" size="large" variant="outlined" onClick={handleTrueModal}>
         Comprar
-      </button>
+      </Button>
+    </Box>
 
     </>
   );

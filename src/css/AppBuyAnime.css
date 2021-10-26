@@ -3,18 +3,18 @@
     display:flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 100px;
     
 }
-.btn-ui{
-    width: 30%;
-    height: 15%;
 
-}
 
 .centerContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-center;
     height: 100%;
-    margin-top: 10%;
+   
 
 
 }
@@ -23,5 +23,8 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
+   
+    
+    
 
 }

@@ -1,3 +1,5 @@
+import { Button } from '@mui/material';
+import { Box } from '@mui/system';
 import React from "react";
 
 
@@ -7,10 +9,12 @@ export const BtnAddToCart = ({ addToCart ,disabledBtn}) => {
  
 
   return (
-    <div>
-      <button className="btn btn-add" onClick={addToCart} disabled={!disabledBtn}>
+    <>
+    <Box ml={1}>
+      <Button  color="success"  size="large" variant="outlined" onClick={addToCart} disabled={!disabledBtn}>
         Añadir al carrito
-      </button>
-    </div>
+      </Button>
+    </Box>
+    </>
   );
 };

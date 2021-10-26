@@ -9,13 +9,17 @@
  }
 
 .modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     position: absolute;
     top:10%;
     left: 40%;
     width: 400px;
-    height: 70%;
-    background: white ;
-    border: 2px solid #000;
+    height: 80%;
+    background:white;
+    border: 2px solid rgb(150, 148, 148);
+    border-radius: 10px;
     box-Shadow: 5px;
     padding: 2px 4px 3px;
   

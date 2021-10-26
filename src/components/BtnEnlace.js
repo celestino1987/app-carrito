@@ -1,22 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { Button } from '@mui/material';
+
+import { useDispatch } from 'react-redux';
+import { openChange, openModal } from '../redux-thunk/accions/modalAction';
 
 import  '../css/AppBtn.css'
 
 
-
-export const BtnEnlace = ({setChange ,setOpen,setPrice}) => {
+export const BtnEnlace = () => { 
+const dispatch =  useDispatch()
     const handleCall =() => {
-        setOpen(true)
-        setChange(true)
-        setPrice(false)
+        dispatch(openModal(true))
+        dispatch(openChange(true))
+      
+       
         
     }
     
     return (
-        <div>
-        <button  className="btn-buy btn" onClick={handleCall}> Comprar</button>
-        </div>
+       
+      <Button  className="btn" color="error" size="small" variant="outlined" onClick={handleCall}>
+        Comprar
+      </Button>
+        
     )
 }
 BtnEnlace.propTypes = {

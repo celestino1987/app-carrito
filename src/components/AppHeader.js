@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import "../css/AppHeader.css";
 
 export const AppHeader = ({ AxiosAnime }) => {
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ export const AppHeader = ({ AxiosAnime }) => {
     <>
       <header>
         <h1>
-          El mejor <strong>-Anime-</strong> para comprar
+          El mejor <strong>-Anime</strong> 
         </h1>
         <form className="search-box" onSubmit={handleSearch}>
           <input

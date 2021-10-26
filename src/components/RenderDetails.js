@@ -7,59 +7,51 @@ import { AppCircular } from "./AppCircular";
 import "../css/AddIconSopping.css";
 
 export const RenderDetails = ({
-addToCart,
+  addToCart,
   detail,
-  disableCart,
   disabledBtn,
-  movie,
-  setChange,
-  setOpen,
-  setDisableCart,
-  setPrice,
-
+  
+  
 }) => {
   return (
     <>
       {detail ? (
         <section>
-           <div className="icon">
+          <div className="icon">
             <BackArrow />
-            {
-              <AddIconSopping
-                movie={movie}
-                setChange={setChange}
-                setOpen={setOpen}
-                disableCart={disableCart}
-                setDisableCart={setDisableCart}
-               
-              />
-            }
+            <AddIconSopping  />
           </div>
           <h2>Detalles de la compra</h2>
           <div className="container">
             <div className="card">
               <img src={detail?.image_url} alt="imagen.." />
-              <h3>Precio: {Math.round(detail?.score * 2)}Eu</h3>
+              <h4>Precio:<span className="color">{Math.round(detail?.score * 2)}€
+                </span> </h4>
             </div>
             <div className="containerDetails">
-              <h4>Puntuación: {detail?.score}</h4>
               <h4>
-                <strong>Titulo: </strong>
-                {detail?.title}
+                Puntuación: <span className="color">{detail?.score}</span>
               </h4>
-              <h4>Duración: {detail?.duration}</h4>
-              <div className="trailer">
-                <strong> Trailer:</strong>{" "}
+              <h4>
+                Título:
+                 <span>{ detail?.title}</span>
+              </h4>
+              <h4>
+                Duración: <span>{detail?.duration}</span>
+              </h4>
+              
+                <h4> Trailer:
                 <a href={detail.trailer_url} target="_blank" rel="noreferrer">
-                  Ver trailer aqui
+                 <span> 
+                   Ver trailer aquí
+                   </span>
                 </a>
-              </div>
+                  </h4>{" "}
+              
             </div>
             <div className="btns">
               <BtnBuy
-                setOpen={setOpen}
-                setChange={setChange}
-                setPrice={setPrice}
+              
                 addToCart={addToCart}
               />
               <BtnAddToCart addToCart={addToCart} disabledBtn={disabledBtn} />

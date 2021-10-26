@@ -21,6 +21,23 @@
     
    
 }
+h4{
+    
+    font-style:norma;
+    font-size: 25px;
+    color: slategrey;
+
+}
+span{
+    font-style:italic;
+    font-size: 20px;
+    color: rgb(83, 78, 77);
+    margin-left: 5px;
+
+}
+.color{
+    color: tomato;
+}
 h2{
     display: flex;
     justify-content: center;
@@ -35,13 +52,7 @@ h2{
     display: flex;
     justify-content: center;
 }
-.trailer > a {
+h4 > a {
     text-decoration: none;
-    color: brown;
-
-}
-.trailer > a:hover {
-    font-size: 17px;
-color:yellowgreen;
-
+    
 }
