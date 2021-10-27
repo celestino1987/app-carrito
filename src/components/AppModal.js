@@ -11,12 +11,7 @@ import { openModal } from "../redux-thunk/accions/modalAction";
 
 import "../css/AppModal.css";
 
-export default function AppModal({
-
-  setAmount,
-  amount,
- 
-}) {
+export default function AppModal({ setAmount, amount }) {
   const state = useSelector((state) => state.modalReducer);
   const changeModal = useSelector((state) => state.modalChangeReducer);
 
@@ -33,23 +28,17 @@ export default function AppModal({
 
   const body = (
     <div className="modal">
-      <button className="btn-close" onClick={handleClose}>
-        <CloseIcon color="secondary" />,
-      </button>
+      <div className="div-icon-close">
+        <button className="btn-close" onClick={handleClose}>
+          <CloseIcon color="secondary" />,
+        </button>
+      </div>
 
       {changeModal ? (
-        <AppBuyAnime
-          totalSum={totalSum}
-        
-        />
+        <AppBuyAnime totalSum={totalSum} />
       ) : (
         <AppBuyCart
-          amount={amount}
-        
-          movie={movie}
-          setAmount={setAmount}
-         
-         
+          
           totalSum={totalSum}
         />
       )}

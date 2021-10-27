@@ -5,6 +5,7 @@ import { BackArrow } from "./BackArrow";
 import { AddIconSopping } from "./AddIconSopping";
 import { AppCircular } from "./AppCircular";
 import "../css/AddIconSopping.css";
+import { RenderPuntuacion } from "./RenderPuntuacion";
 
 export const RenderDetails = ({
   addToCart,
@@ -29,9 +30,8 @@ export const RenderDetails = ({
                 </span> </h4>
             </div>
             <div className="containerDetails">
-              <h4>
-                Puntuación: <span className="color">{detail?.score}</span>
-              </h4>
+              <RenderPuntuacion />
+              
               <h4>
                 Título:
                  <span>{ detail?.title}</span>

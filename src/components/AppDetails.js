@@ -13,7 +13,6 @@ import { RenderDetails } from "./RenderDetails";
 import "../css/AppDetails.css";
 import "../css/AppCard.css";
 
-
 export const AppDetails = () => {
   const [detail] = useHookGetId();
   const dispatch = useDispatch();
@@ -24,7 +23,6 @@ export const AppDetails = () => {
 
   const [disabledBtn, setDisabledBtn] = useState(true);
 
-  
   const movie = useSelector((state) => state.rootReducer.carrito);
 
   //Logica para añadir  al carrito

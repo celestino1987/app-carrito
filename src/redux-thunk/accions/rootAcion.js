@@ -37,19 +37,21 @@ export const axiosPostMovies = (movies) => {
 };
 
 export const axiosPutMovies = (id, update) => {
-  return async (dispatch) => {
-    await putMovies(id, update).then((res) =>
-      dispatch({
-        type: types.PUT_BASE,
-        payload: res.data,
-      })
-    )
+  return (dispatch) => {
+     putMovies(id, update).then((res) =>{
+       
+       dispatch({
+         type: types.PUT_BASE,
+         payload: res.data,
+        })
+      }
+        )
+    
     .catch( error => {
       console.error( 'Put no va: ', error )
     })
   };
 };
-
 
 export const axiosDelMovies = (id)=>{
   return async (dispatch) => {

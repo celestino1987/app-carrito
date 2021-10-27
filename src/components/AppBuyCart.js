@@ -20,13 +20,14 @@ import { openLoading, openModal } from "../redux-thunk/accions/modalAction";
 import "../css/AppBuyCart.css";
 
 export const AppBuyCart = ({
-  
-  movie,
+ 
   totalSum,
 }) => {
+  const movie = useSelector((state) => state.rootReducer.carrito);
   const loading = useSelector((state)=>state.loadingReducer)
   const dispatch = useDispatch();
-  let update = {};
+ let update = {};
+  
 
   const handleDelete = (id) => {
     dispatch(openModal(false));
@@ -60,7 +61,7 @@ export const AppBuyCart = ({
       dispatch(openLoading(true))
       
     }, 1000);
-
+    
     dispatch(openLoading(false))
   }, []);
   if (!loading) {
@@ -168,7 +169,7 @@ export const AppBuyCart = ({
 
           <div className="box-center">
             <h3>
-              Total:<span> {Math.round(totalSum)}€ </span>
+              Total:<span className="color"> {Math.round(totalSum)}€ </span>
             </h3>
 
             <BtnEnlace />

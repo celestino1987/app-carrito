@@ -57,7 +57,7 @@ export const AppBuyAnime = ({ totalSum}) => {
       dispatch(openLoading(true))
       serviceSwal(
         "success",
-        "Su pedido fue todo un exito !Gracias¡",
+        "Su pedido fue todo un exito ¡Gracias!",
         "",
         false,
         false,

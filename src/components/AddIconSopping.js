@@ -17,7 +17,7 @@ export const AddIconSopping = () => {
     (acomulador, num) => acomulador + num,
     0
   );
-  console.log(totalSumAmount)
+
 
   const dispatch = useDispatch()
   const handleOpenModal = () => {

@@ -28,6 +28,14 @@ h4{
     color: slategrey;
 
 }
+.color-point{
+   font-size:25px ;
+    color: rgb(248, 37, 0);
+    padding: 10px;
+    border: 4px double rgb(129, 127, 127);
+    border-radius: 10px;
+
+}
 span{
     font-style:italic;
     font-size: 20px;
