@@ -11,7 +11,7 @@ import { openModal } from "../redux-thunk/accions/modalAction";
 
 import "../css/AppModal.css";
 
-export default function AppModal({ setAmount, amount }) {
+export default function AppModal() {
   const state = useSelector((state) => state.modalReducer);
   const changeModal = useSelector((state) => state.modalChangeReducer);
 

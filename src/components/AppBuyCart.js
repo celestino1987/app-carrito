@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -19,15 +19,14 @@ import { serviceSwal } from "../service/serviceSwal";
 import { openLoading, openModal } from "../redux-thunk/accions/modalAction";
 import "../css/AppBuyCart.css";
 
-export const AppBuyCart = ({
- 
-  totalSum,
-}) => {
+import { debounce,throttle} from "lodash";
+
+export const AppBuyCart = ({ totalSum }) => {
   const movie = useSelector((state) => state.rootReducer.carrito);
-  const loading = useSelector((state)=>state.loadingReducer)
+  const loading = useSelector((state) => state.loadingReducer);
   const dispatch = useDispatch();
- let update = {};
-  
+ 
+  let update = {};
 
   const handleDelete = (id) => {
     dispatch(openModal(false));
@@ -56,13 +55,27 @@ export const AppBuyCart = ({
     });
   };
 
+  const handleRest = debounce((id, mov, amount) => {
+
+    dispatch(
+      axiosPutMovies(
+        id,
+        (update = {
+          ...mov,
+          amount: amount - 1,
+        })
+      )
+    );
+  },0);
+
+ 
+  
   useEffect(() => {
     setTimeout(() => {
-      dispatch(openLoading(true))
-      
+      dispatch(openLoading(true));
     }, 1000);
-    
-    dispatch(openLoading(false))
+
+    dispatch(openLoading(false));
   }, []);
   if (!loading) {
     return <AppCircular />;
@@ -90,7 +103,9 @@ export const AppBuyCart = ({
                       color="text.primary"
                     >
                       Precio:{" "}
-                      <span className="color">{Math.round(mov?.price * mov?.amount)}€</span>
+                      <span className="color">
+                        {Math.round(mov?.price * mov?.amount)}€
+                      </span>
                     </Typography>
                     <Typography
                       ml={1}
@@ -110,19 +125,11 @@ export const AppBuyCart = ({
                       color="text.primary"
                     >
                       <button
-                        className={mov.amount ===1 ? "btn-color": "btn-change"}
+                        className={
+                          mov.amount === 1 ? "btn-color" : "btn-change"
+                        }
                         disabled={mov.amount === 1 ? true : false}
-                        onClick={() => {
-                          dispatch(
-                            axiosPutMovies(
-                              mov.id,
-                              (update = {
-                                ...mov,
-                                amount: mov.amount - 1,
-                              })
-                            )
-                          );
-                        }}
+                        onClick={() => handleRest(mov.id, mov, mov.amount)}
                       >
                         {" "}
                         <RemoveTwoToneIcon />{" "}

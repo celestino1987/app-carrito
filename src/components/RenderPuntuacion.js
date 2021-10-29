@@ -1,12 +1,12 @@
 import React from "react";
-import { useHookGetId } from "../hooks/useHookGetId";
 
-export const RenderPuntuacion = () => {
-    const [detail] = useHookGetId();
+
+export const RenderPuntuacion = ({puntuacion}) => {
+    
   return (
     <div>
       <h4>
-        Puntuación: <span className="color-point">{detail?.score}</span>
+        Puntuación: <span className="color-point">{puntuacion}</span>
       </h4>
     </div>
   );

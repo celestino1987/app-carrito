@@ -10,7 +10,7 @@ import { axiosMovies } from "../redux-thunk/accions/rootAcion";
 
 
 export const App = () => {
-  const [animeList, AxiosAnime] = useHookGetAxios();
+  const [animeList, debounceAxiosData] = useHookGetAxios();
  
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ export const App = () => {
     </div>
       <AppModal />
 
-      <AppHeader AxiosAnime={AxiosAnime} />
+      <AppHeader AxiosAnime={debounceAxiosData} />
 
       <AppGalery animeList={animeList} />
     </>

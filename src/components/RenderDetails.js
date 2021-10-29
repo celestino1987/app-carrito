@@ -30,7 +30,7 @@ export const RenderDetails = ({
                 </span> </h4>
             </div>
             <div className="containerDetails">
-              <RenderPuntuacion />
+              <RenderPuntuacion  puntuacion={detail.score}/>
               
               <h4>
                 Título:

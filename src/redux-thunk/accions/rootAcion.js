@@ -37,8 +37,8 @@ export const axiosPostMovies = (movies) => {
 };
 
 export const axiosPutMovies = (id, update) => {
-  return (dispatch) => {
-     putMovies(id, update).then((res) =>{
+  return  async(dispatch) => {
+   await  putMovies(id, update).then((res) =>{
        
        dispatch({
          type: types.PUT_BASE,
