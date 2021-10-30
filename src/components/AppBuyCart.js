@@ -23,10 +23,27 @@ import { debounce,throttle} from "lodash";
 
 export const AppBuyCart = ({ totalSum }) => {
   const movie = useSelector((state) => state.rootReducer.carrito);
+  const [count,setCount] = useState(1)
+console.log(count)
+
+
+  
   const loading = useSelector((state) => state.loadingReducer);
   const dispatch = useDispatch();
  
   let update = {};
+
+
+  const suma = (id, mov,amount) => {
+    // me suma 1 pero no cuentan los clips
+   // setCount( prevCount => prevCount + 1 -prevCount )
+      //cuenta los clips
+      setCount( prevCount => prevCount + 1  )
+      
+      dispatch(axiosPutMovies(id,update={...mov ,amount: amount + count} ))
+      
+  }
+
 
   const handleDelete = (id) => {
     dispatch(openModal(false));
@@ -55,18 +72,17 @@ export const AppBuyCart = ({ totalSum }) => {
     });
   };
 
-  const handleRest = debounce((id, mov, amount) => {
-
-    dispatch(
-      axiosPutMovies(
-        id,
-        (update = {
-          ...mov,
-          amount: amount - 1,
-        })
-      )
-    );
-  },0);
+const rest = (id, mov,amount) => {
+  dispatch(
+    axiosPutMovies(
+      id,
+      (update = {
+        ...mov,
+        amount: amount - 1,
+      })
+    )
+  );
+}
 
  
   
@@ -129,7 +145,7 @@ export const AppBuyCart = ({ totalSum }) => {
                           mov.amount === 1 ? "btn-color" : "btn-change"
                         }
                         disabled={mov.amount === 1 ? true : false}
-                        onClick={() => handleRest(mov.id, mov, mov.amount)}
+                        onClick={() => rest(mov.id, mov,mov.amount)}
                       >
                         {" "}
                         <RemoveTwoToneIcon />{" "}
@@ -137,17 +153,7 @@ export const AppBuyCart = ({ totalSum }) => {
 
                       <button
                         className="btn-change"
-                        onClick={() => {
-                          dispatch(
-                            axiosPutMovies(
-                              mov.id,
-                              (update = {
-                                ...mov,
-                                amount: mov.amount + 1,
-                              })
-                            )
-                          );
-                        }}
+                        onClick={() => suma(mov.id,mov, mov.amount)}
                       >
                         {" "}
                         <AddTwoToneIcon />{" "}

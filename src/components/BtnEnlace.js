@@ -21,7 +21,7 @@ const dispatch =  useDispatch()
     return (
        
       <Button  className="btn" color="error" size="small" variant="outlined" onClick={handleCall}>
-        Comprar
+        Realizar Pedido
       </Button>
         
     )
