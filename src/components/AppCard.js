@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-
 import "../css/AppCard.css";
 
 export const AppCard = ({ anime, random }) => {

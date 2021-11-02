@@ -3,7 +3,7 @@ import { types } from "../types/types";
 const initialstate = { carrito: [] };
 
 export const rootReducer = (state = initialstate, action) => {
-  console.log(action,'action')
+ // console.log(action,'action')
   switch (action.type) {
     case types.GET_BASE:
       return { ...state, carrito: action.payload };
@@ -15,7 +15,7 @@ export const rootReducer = (state = initialstate, action) => {
         ...state,
         carrito: [
           ...state.carrito.map((item) =>
-            item.id === action.payload.id ? action.payload : item
+            item.id === action.payload.id ? action.payload  : item
           ),
         ],
       };

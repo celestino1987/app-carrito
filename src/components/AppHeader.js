@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
+import { RenderHeader } from "./RenderHeader";
 
 import "../css/AppHeader.css";
 
@@ -14,22 +15,8 @@ export const AppHeader = ({ AxiosAnime }) => {
 
   return (
     <>
-      <header>
-        <h1>
-          El mejor <strong>-Anime</strong> 
-        </h1>
-        <form className="search-box" onSubmit={handleSearch}>
-          <input
-            type="search"
-            className="search-input"
-            placeholder="Buscar..."
-            required
-            value={search || ""}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </form>
-      </header>
-      <div></div>
+     <RenderHeader handleSearch={handleSearch} setSearch={setSearch} search={search} />
+
     </>
   );
 };

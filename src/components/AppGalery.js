@@ -8,32 +8,30 @@ import "../css/AppGalery.css";
 export const AppGalery = ({ animeList }) => {
   const [random] = useHookRandomGetId();
 
-  
   return (
     <main>
-    {animeList?.length === 0 ? (
-      <div>
-        {!random ? (
-          <AppCircular />
-        ) : (
-          <div className="cards">
-            {random?.map((random) => (
-              <AppCard random={random} key={random.mal_id} />
-            ))}
-          </div>
-        )}
-      </div>
-    ) : (
-      <div>
-        
+      {animeList?.length === 0 ? (
+        <div>
+          {!random ? (
+            <AppCircular />
+          ) : (
+            <div className="cards">
+              {random?.map((random) => (
+                <AppCard random={random} key={random.mal_id} />
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>
+          
           <div className="cards">
             {animeList?.map((anime) => (
               <AppCard anime={anime} key={anime.mal_id} />
             ))}
           </div>
-       
-      </div>
-    )}
-  </main>
+        </div>
+      )}
+    </main>
   );
 };

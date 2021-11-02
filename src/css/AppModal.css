@@ -13,14 +13,18 @@
   justify-content: end;
 }
 
+.body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .modal {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   position: absolute;
-  top: 10%;
-  left: 40%;
-  width: 400px;
+  width: 30%;
   height: 80%;
   background: white;
   border: 2px solid rgb(150, 148, 148);

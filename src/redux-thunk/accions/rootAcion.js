@@ -39,10 +39,10 @@ export const axiosPostMovies = (movies) => {
 export const axiosPutMovies = (id, update) => {
   return  async(dispatch) => {
    await  putMovies(id, update).then((res) =>{
-       
+       console.log(res)
        dispatch({
          type: types.PUT_BASE,
-         payload: res.data,
+         payload: res.data ,
         })
       }
         )

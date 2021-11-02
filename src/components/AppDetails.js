@@ -12,6 +12,7 @@ import { RenderDetails } from "./RenderDetails";
 
 import "../css/AppDetails.css";
 import "../css/AppCard.css";
+import { serviceSwal } from "../service/serviceSwal";
 
 export const AppDetails = () => {
   const [detail] = useHookGetId();
@@ -50,6 +51,14 @@ export const AppDetails = () => {
     setTimeout(() => {
       setDisabledBtn(true);
     }, 2000);
+    serviceSwal(
+      "success",
+      "Su producto se añadio correctamente",
+      "",
+      false,
+      false,
+      1000
+    )
   };
 
   useEffect(() => {

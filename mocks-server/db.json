@@ -1,11 +1,25 @@
 {
   "MOVIES": [
     {
-      "price": 13.86,
-      "foto": "https://cdn.myanimelist.net/images/anime/1553/107721.jpg",
-      "mal_id": 39710,
-      "amount": 87,
+      "price": 14.44,
+      "foto": "https://cdn.myanimelist.net/images/anime/1979/93135.jpg",
+      "mal_id": 34443,
+      "amount": 17,
       "id": 1
+    },
+    {
+      "price": 13.56,
+      "foto": "https://cdn.myanimelist.net/images/anime/6/85202.jpg",
+      "mal_id": 1956,
+      "amount": 5,
+      "id": 2
+    },
+    {
+      "price": 16.68,
+      "foto": "https://cdn.myanimelist.net/images/anime/7/21065.jpg",
+      "mal_id": 5040,
+      "amount": 32,
+      "id": 3
     }
   ]
 }

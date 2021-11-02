@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 
-import { Button } from "@material-ui/core";
-import tarjetas from "../img/tarjetas.png";
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppCircular } from "./AppCircular";
 import { serviceSwal } from "../service/serviceSwal";
@@ -13,6 +10,7 @@ import PropTypes from "prop-types";
 
 import { getCart } from "../service/serviceBuyMovie";
 import { openLoading, openModal } from "../redux-thunk/accions/modalAction";
+import { RenderBuyAnime } from "./RenderBuyAnime";
 
 import "../css/AppBuyAnime.css";
 
@@ -25,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AppBuyAnime = ({ totalSum}) => {
-  const loading = useSelector((state)=>state.loadingReducer)
+export const AppBuyAnime = ({ totalSum }) => {
+  const loading = useSelector((state) => state.loadingReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -51,10 +49,10 @@ export const AppBuyAnime = ({ totalSum}) => {
     e.preventDefault();
 
     deleteAll();
-    dispatch(openLoading(false))
+    dispatch(openLoading(false));
     setTimeout(() => {
       dispatch(openModal(false));
-      dispatch(openLoading(true))
+      dispatch(openLoading(true));
       serviceSwal(
         "success",
         "Su pedido fue todo un exito ¡Gracias!",
@@ -68,9 +66,9 @@ export const AppBuyAnime = ({ totalSum}) => {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(openLoading(true))
+      dispatch(openLoading(true));
     }, 1000);
-    dispatch(openLoading(false))
+    dispatch(openLoading(false));
   }, []);
 
   if (!loading) {
@@ -78,64 +76,11 @@ export const AppBuyAnime = ({ totalSum}) => {
   } else {
     return (
       <>
-        <div className="centerContainer">
-          <img src={tarjetas} alt="img" />
-          <form
-            className={classes.root}
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
-          >
-            <TextField
-              required
-              label="Required"
-              placeholder="Nombre del titular"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              type="number"
-              label="Requierd"
-              placeholder="XXXX-XXXX-XXXX-XXXX"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              type="number"
-              label="Requierd"
-              placeholder="Fecha de caducidad (MM/AA)"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              type="number"
-              label="Requierd"
-              placeholder="CVV"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <div className="div-btn">
-              <h3>
-                Total de su pedido: <span> {Math.round(totalSum)}€</span>{" "}
-              </h3>
-
-              <Button
-                type="submit"
-                className="btn-ui"
-                color="secondary"
-                size="small"
-                variant="outlined"
-              >
-                {" "}
-                Enviar{" "}
-              </Button>
-            </div>
-          </form>
-        </div>
+        <RenderBuyAnime
+          handleSubmit={handleSubmit}
+          totalSum={totalSum}
+          classes={classes}
+        />
       </>
     );
   }

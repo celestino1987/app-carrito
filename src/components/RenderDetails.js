@@ -4,8 +4,8 @@ import { BtnAddToCart } from "./BtnAddToCart";
 import { BackArrow } from "./BackArrow";
 import { AddIconSopping } from "./AddIconSopping";
 import { AppCircular } from "./AppCircular";
-import "../css/AddIconSopping.css";
 import { RenderPuntuacion } from "./RenderPuntuacion";
+import "../css/AddIconSopping.css";
 
 export const RenderDetails = ({
   addToCart,

@@ -27,6 +27,8 @@ export default function AppModal() {
   };
 
   const body = (
+    <div className="body">
+
     <div className="modal">
       <div className="div-icon-close">
         <button className="btn-close" onClick={handleClose}>
@@ -36,13 +38,11 @@ export default function AppModal() {
 
       {changeModal ? (
         <AppBuyAnime totalSum={totalSum} />
-      ) : (
-        <AppBuyCart
-          
-          totalSum={totalSum}
-        />
-      )}
+        ) : (
+          <AppBuyCart totalSum={totalSum} />
+          )}
     </div>
+          </div>
   );
 
   return (
