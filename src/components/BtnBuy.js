@@ -11,10 +11,13 @@ export const BtnBuy = ({ addToCart }) => {
   const dispatch = useDispatch();
 
   const handleTrueModal = () => {
-    dispatch(openModal(true));
-    dispatch(openChange(true));
-
     addToCart();
+    setTimeout(()=>{
+
+      dispatch(openModal(true));
+      dispatch(openChange(true));
+    },1000)
+
   };
 
   return (

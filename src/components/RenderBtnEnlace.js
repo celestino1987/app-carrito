@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-export const RenderBtnEnlace = ( {handleCall}) => {
+export const RenderBtnEnlace = ( {handleCall,disabled}) => {
   return (
     <>
       <Button
@@ -9,8 +9,9 @@ export const RenderBtnEnlace = ( {handleCall}) => {
         size="small"
         variant="outlined"
         onClick={handleCall}
+        disabled={disabled}
       >
-        realiza tu pedido
+        {disabled ? "...Recalculando" : "Realiza  pedido"}
       </Button>
     </>
   );

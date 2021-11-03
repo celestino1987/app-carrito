@@ -10,7 +10,8 @@ import Typography from "@mui/material/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { BtnEnlace } from "./BtnEnlace";
 
-export const RenderBuyCart = ( {totalSum , handleDelete,handleSumRest,localCart}) => {
+
+export const RenderBuyCart = ( {totalSum , handleDelete,handleSumRest,localCart,disabled}) => {
     return (
         <div>
                  <div className="box">
@@ -100,7 +101,7 @@ export const RenderBuyCart = ( {totalSum , handleDelete,handleSumRest,localCart}
               Total:<span className="color"> {Math.round(totalSum)}€ </span>
             </h3>
 
-            <BtnEnlace />
+            <BtnEnlace disabled={disabled} />
           </div>
         </div>
         </div>

@@ -4,22 +4,29 @@
       "price": 14.44,
       "foto": "https://cdn.myanimelist.net/images/anime/1979/93135.jpg",
       "mal_id": 34443,
-      "amount": 17,
+      "amount": 13,
       "id": 1
     },
     {
       "price": 13.56,
       "foto": "https://cdn.myanimelist.net/images/anime/6/85202.jpg",
       "mal_id": 1956,
-      "amount": 5,
+      "amount": 20,
       "id": 2
     },
     {
       "price": 16.68,
       "foto": "https://cdn.myanimelist.net/images/anime/7/21065.jpg",
       "mal_id": 5040,
-      "amount": 32,
+      "amount": 97,
       "id": 3
+    },
+    {
+      "price": 17.04,
+      "foto": "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
+      "mal_id": 16498,
+      "amount": 9,
+      "id": 4
     }
   ]
 }

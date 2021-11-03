@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { axiosDelMovies } from "../redux-thunk/accions/rootAcion";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,14 +14,15 @@ import "../css/AppBuyCart.css";
 
 export const AppBuyCart = ({ totalSum }) => {
   const movie = useSelector((state) => state.rootReducer.carrito);
-
-  const [localCart, setLocalCart] = useState([...movie]);
-
   const loading = useSelector((state) => state.loadingReducer);
+  const [localCart, setLocalCart] = useState([...movie]);
+  const [disabled, setDisabled] = useState();
+
   const dispatch = useDispatch();
   let update = {};
 
   const handleSumRest = (id, ini = Boolean) => {
+    setDisabled(true);
     setLocalCart(
       localCart.map((count) => {
         // console.log(count);
@@ -33,13 +34,16 @@ export const AppBuyCart = ({ totalSum }) => {
         return count;
       })
     );
-
-    dispatch(
-      axiosPutMovies(
-        id,
-        localCart.find((a) => a.id === id)
-      )
-    );
+    const handleDebounce = debounce(() => {
+      dispatch(
+        axiosPutMovies(
+          id,
+          localCart.find((a) => a.id === id)
+        )
+      );
+      setDisabled(false);
+    }, 2000);
+    handleDebounce();
   };
 
   const handleDelete = (id) => {
@@ -82,6 +86,7 @@ export const AppBuyCart = ({ totalSum }) => {
     return (
       <>
         <RenderBuyCart
+          disabled={disabled}
           handleDelete={handleDelete}
           handleSumRest={handleSumRest}
           localCart={localCart}

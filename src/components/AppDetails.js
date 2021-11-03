@@ -42,6 +42,7 @@ export const AppDetails = () => {
   };
   //funcion para añadir al carrito y si existe mandar solo  el put
   const addToCart = () => {
+ 
     setDisabledBtn(false);
     if (id?.mal_id === detailsObject.mal_id) {
       dispatch(axiosPutMovies(id.id, update));
@@ -51,14 +52,17 @@ export const AppDetails = () => {
     setTimeout(() => {
       setDisabledBtn(true);
     }, 2000);
-    serviceSwal(
-      "success",
-      "Su producto se añadio correctamente",
-      "",
-      false,
-      false,
-      1000
-    )
+
+
+      serviceSwal(
+        "success",
+        "Su producto se añadio correctamente",
+        "",
+        false,
+        false,
+        1000
+        )
+      
   };
 
   useEffect(() => {
