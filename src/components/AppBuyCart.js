@@ -34,6 +34,7 @@ export const AppBuyCart = ({ totalSum }) => {
         return count;
       })
     );
+    // función para actualizar el articulo en el carrito
     const handleDebounce = debounce(() => {
       dispatch(
         axiosPutMovies(
@@ -59,11 +60,9 @@ export const AppBuyCart = ({ totalSum }) => {
       if (res.isConfirmed) {
         dispatch(axiosDelMovies(id));
         try {
-          if (movie.length - 1 < 1) {
-            dispatch(openModal(false));
-          } else {
-            dispatch(openModal(true));
-          }
+          movie.length - 1 < 1
+            ? dispatch(openModal(false))
+            : dispatch(openModal(true));
         } catch {
           serviceSwal("error", "", "Error", false, false, 1500);
         }

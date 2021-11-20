@@ -1,70 +1,126 @@
-# Getting Started with Create React App
+# App  carrito de compras
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecyo es una simulación se un buscador y un carrito de compra 
 
-## Available Scripts
+## Iinstalacion para correr el proyecto
 
-In the project directory, you can run:
+Directorios del Proyecto:
+
+### `git clone https://github.com/celestino1987/app-carrito.git`
+
+puedes clonar el proyecto en tu IDE, y luego hacer un npm install 
 
 ### `npm start`
+El proyecto se ejecutara en  http://localhost:3000/
+también deberias correr el mocks-server una vez hagas npm start de la aplicacion , puedes abrir otra terminal y hacer : cd mocks-server , luego npm start.
+ 
+## Construido con :
+- React , Redux , redux-thunk 
+- Javascript 
+- css
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Algunas funcionalidades
+![Inicio aplicacion](/src/img/portada.jpg)
 
-### `npm run build`
+codigo:
+~~~ export const AppCard = ({ anime, random }) => {
+  const history = useHistory();
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  return (
+    <>
+      <div className="card">
+        <div
+          onClick={() =>
+            history.push(`/details/${anime ? anime.mal_id : random.mal_id}`)
+          }
+        >
+          <img
+            src={anime ? anime?.image_url : random?.image_url}
+            alt={"imagen de "}
+          />
+        </div>
+        <h3>{anime ? anime.title : random.title}</h3>
+      </div>
+    </>
+  );
+}; 
+~~~ 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![detalles del articulo](/src/img/detalles.jpg)
+codigo:
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+~~~ 
+ //Logica para añadir  al carrito
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  const id = movie?.find((id) => id.mal_id === detail.mal_id);
+  const detailsObject = {
+    price: detail.score * 2,
+    foto: detail?.image_url,
+    mal_id: detail.mal_id,
+    amount: amount,
+  };
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  const update = {
+    ...detailsObject,
+    amount: id?.amount + 1,
+  };
+  //funcion para añadir al carrito y si existe mandar solo  el put
+  const addToCart = () => {
+ 
+    setDisabledBtn(false);
+    if (id?.mal_id === detailsObject.mal_id) {
+      dispatch(axiosPutMovies(id.id, update));
+    } else {
+      dispatch(axiosPostMovies(detailsObject));
+    }
+    setTimeout(() => {
+      setDisabledBtn(true);
+    }, 2000);
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+~~~ 
+![Carrito de compras](/src/img/carrito.jpg)
 
-## Learn More
+codigo:
+~~~
+ const handleDelete = (id) => {
+    dispatch(openModal(false));
+    serviceSwal(
+      "question",
+      "¿Desea eliminar el producto?",
+      "",
+      true,
+      true,
+      false
+    ).then((res) => {
+      if (res.isConfirmed) {
+        dispatch(axiosDelMovies(id));
+        try {
+          movie.length - 1 < 1
+            ? dispatch(openModal(false))
+            : dispatch(openModal(true));
+        } catch {
+          serviceSwal("error", "", "Error", false, false, 1500);
+        }
+      } else {
+        dispatch(openModal(true));
+      }
+    });
+  };
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(openLoading(true));
+    }, 1000);
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    dispatch(openLoading(false));
+~~~
+## WiKi:
+puedes encontrarvmucho más de este proyecto en [wiki](https://support.zendesk.com/hc/es/articles/4408846544922-Uso-de-Markdown-para-el-formato-de-texto)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Autores:
+- jesús Prada Celestino
