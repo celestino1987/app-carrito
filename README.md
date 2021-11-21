@@ -1,6 +1,6 @@
 # App  carrito de compras
 
-Este proyecyo es una simulación se un buscador y un carrito de compra 
+Este proyecyo es poc de un catálogo de series/películas usando la api de jikan.El objetivo técnico del la poc es crear un carrito que se sincronice con el servidor.
 
 ## Iinstalacion para correr el proyecto
 
@@ -8,11 +8,12 @@ Directorios del Proyecto:
 
 ### `git clone https://github.com/celestino1987/app-carrito.git`
 
-puedes clonar el proyecto en tu IDE, y luego hacer un npm install 
+ Clonar el proyecto (desde una ide,consola o donde desees) y luego hacer un npm install para tener las dependencias del proyecto en local.
 
-### `npm start`
-El proyecto se ejecutara en  http://localhost:3000/
-también deberias correr el mocks-server una vez hagas npm start de la aplicacion , puedes abrir otra terminal y hacer : cd mocks-server , luego npm start.
+### `npm run dev `
+El proyecto se ejecutara en  http://localhost:3000/,
+junto con el servidor.
+
  
 ## Construido con :
 - React , Redux , redux-thunk 
@@ -119,8 +120,7 @@ codigo:
 
     dispatch(openLoading(false));
 ~~~
-## WiKi:
-puedes encontrarvmucho más de este proyecto en [wiki](https://support.zendesk.com/hc/es/articles/4408846544922-Uso-de-Markdown-para-el-formato-de-texto)
+
 
 ## Autores:
 - jesús Prada Celestino
