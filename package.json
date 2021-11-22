@@ -28,10 +28,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false react-scripts build && npm run dev ",
+    "build": "concurrently -c \"cyan,magenta\" \"npm:mocks-server\" \"npm:start\" \"npm:netflity\",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mocks-server":"cd mocks-server && npm run start",
+    "netflity": "CI=false react-scripts build"
     "dev": "concurrently -c \"cyan,magenta\" \"npm:mocks-server\" \"npm:start\""
   },
   "eslintConfig": {
