@@ -2,7 +2,7 @@
 
 Este proyecyo es poc de un catálogo de series/películas usando la api de jikan.El objetivo técnico del la poc es crear un carrito que se sincronice con el servidor.
 
-## Iinstalacion para correr el proyecto
+## Instalacion para correr el proyecto
 
 Directorios del Proyecto:
 
